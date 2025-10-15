@@ -11,10 +11,18 @@
     "L11": {
       "numero": "L11",
       "capacidad": 45,
-      "estado": "AVAILABLE",
+      "estado": "En Ruta",
       "ruta": null,
       "posicion": null,
       "pasajeros": 0
+    },
+    "4B": {
+      "numero": "4B",
+      "capacidad": 45,
+      "estado": "Fuera de Servicio",
+      "ruta": null,
+      "posicion": null,
+      "pasajeros": 20
     }
   },
   "rutas": {
@@ -30,6 +38,18 @@
         "Terminal de Buses Coquimbo",
         "Mall Plaza La Serena",
         "Avenida del Mar con Cuatro Esquinas"
+      ]
+    },
+    "Bosque San Carlos - Centro Coquimbo": {
+      "nombre": "Bosque San Carlos - Centro Coquimbo",
+      "paradas": [
+        "Parque Magallanes",
+        "Av. Videl",
+        "Calle Varela",
+        "Plaza de Armas Coquimbo",
+        "Avenida Costanera",
+        "Terminal de Buses",
+        "Calle Freire"
       ]
     }
   }
