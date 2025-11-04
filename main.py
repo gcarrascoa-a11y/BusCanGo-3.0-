@@ -21,6 +21,19 @@ def main():
         
         # Iniciar interfaz gráfica
         root = tk.Tk()
+        root.withdraw()  # Ocultar ventana principal hasta login
+        
+        # Mostrar ventana de login
+        from auth.login import LoginWindow
+        login = LoginWindow(root)
+        root.wait_window(login)
+        
+        if not hasattr(login, 'authenticated') or not login.authenticated:
+            logger.info("Login cancelado")
+            sys.exit(0)
+            
+        # Mostrar ventana principal
+        root.deiconify()
         root.title(WINDOW_TITLE)
         root.geometry(WINDOW_SIZE)
         
