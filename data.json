@@ -1,28 +1,20 @@
 {
   "buses": {
-    "LS-215": {
-      "numero": "LS-215",
-      "capacidad": 45,
-      "estado": "En Ruta",
-      "ruta": "Liserco - Sindempart a Centro",
-      "posicion": null,
-      "pasajeros": 25
-    },
-    "L11": {
-      "numero": "L11",
-      "capacidad": 45,
-      "estado": "En Ruta",
-      "ruta": null,
+    "4B": {
+      "numero": "4B",
+      "capacidad": 40,
+      "estado": "IN_ROUTE",
+      "ruta": "Bosque San Carlos - Centro Coquimbo",
       "posicion": null,
       "pasajeros": 0
     },
-    "4B": {
-      "numero": "4B",
-      "capacidad": 45,
-      "estado": "Fuera de Servicio",
+    "1": {
+      "numero": "1",
+      "capacidad": 40,
+      "estado": "AVAILABLE",
       "ruta": null,
       "posicion": null,
-      "pasajeros": 20
+      "pasajeros": 0
     }
   },
   "rutas": {
@@ -43,14 +35,41 @@
     "Bosque San Carlos - Centro Coquimbo": {
       "nombre": "Bosque San Carlos - Centro Coquimbo",
       "paradas": [
-        "Parque Magallanes",
-        "Av. Videl",
-        "Calle Varela",
-        "Plaza de Armas Coquimbo",
-        "Avenida Costanera",
+        "Parque Magallanes, 1504",
+        "Parque Magallanes, 1300-1324",
+        "Reserva Nacional Lago Carlota, 1321-1381",
+        "Parque Nacional Pan De Azúcar, 441-471",
+        "Presidente Alessandri",
+        "Llanquihue, 501-537",
+        "Llanquihue, 866-898",
+        "Alerce, 1201-1225",
+        "René Schneider, 470-480",
+        "Talca, 402-496",
+        "Regimiento Arica, 310-364",
+        "Regimiento Arica",
+        "Los Pescadores, 4580-5050",
+        "465 Sur",
+        "La Cantera",
+        "Puente Culebron",
+        "Escuela Hogar",
+        "Panamerica Norte, 1650",
+        "Lider Sur",
+        "Videla",
+        "Videla, 302-314",
+        "Varela, 1600-1678",
+        "Unimarc",
         "Terminal de Buses",
-        "Calle Freire"
+        "Varela, 1102-1118",
+        "Varela, 902-998",
+        "Freire"
       ]
+    }
+  },
+  "flota": {
+    "4B": {
+      "cantidad": 6,
+      "capacidad": 40,
+      "ruta": "Bosque San Carlos - Centro Coquimbo"
     }
   }
 }
