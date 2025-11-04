@@ -176,3 +176,5 @@ python -m pytest tests/
 - [Folium](https://python-visualization.github.io/folium/) - Mapas interactivos
 - [TkinterWeb](https://github.com/Andereoo/TkinterWeb) - Visualización web en Tkinter
 - [ReportLab](https://www.reportlab.com/) - Generación de reportes PDF
+
+## Hola es cambio fue 04-11-2025 a las 20:30
