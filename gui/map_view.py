@@ -1,8 +1,6 @@
 import tkinter as tk
 import folium
-from folium.plugins import MiniMap, Fullscreen
 import os
-from config import MAP_CENTER, MAP_ZOOM
 import tempfile
 import webbrowser # 👈 Usaremos la biblioteca estándar de Python
 
@@ -37,38 +35,12 @@ class MapView(tk.Frame):
     def _create_map_file(self):
         """Crea el archivo HTML del mapa y lo guarda en una carpeta temporal."""
         # --- CAMBIOS AQUÍ ---
-        # Coordenadas (usar configuración si está disponible)
-        try:
-            center = MAP_CENTER
-            zoom = MAP_ZOOM
-        except Exception:
-            center = [-29.9533, -71.3436]
-            zoom = 13
-
-        # Crear mapa base sin tiles para poder añadir varias capas
-        m = folium.Map(location=center, zoom_start=zoom, control_scale=True)
-
-        # Capas de tiles alternativas
-        folium.TileLayer('OpenStreetMap', name='OpenStreetMap').add_to(m)
-        folium.TileLayer('Stamen Terrain', name='Stamen Terrain').add_to(m)
-        folium.TileLayer('Stamen Toner', name='Stamen Toner').add_to(m)
-
-        # Título en el mapa (se define antes de la comprobación de Google para poder añadir avisos)
+        # Coordenadas de Coquimbo
+        map_center = [-29.9533, -71.3436]
+        
+        m = folium.Map(location=map_center, zoom_start=14, tiles='OpenStreetMap')
+        
         title_html = '<h3 align="center" style="font-size:20px"><b>BuScanGo - Mapa de Coquimbo</b></h3>'
-
-        # Opción: capa de Google Maps (requiere API Key y uso bajo términos de Google)
-        use_google = os.getenv('USE_GOOGLE_MAPS', '').lower() in ('1', 'true', 'yes')
-        google_key = os.getenv('GOOGLE_MAPS_API_KEY')
-        if use_google:
-            if google_key:
-                # Atención: el uso de tiles de Google está sujeto a los términos de Google Maps.
-                # Asegúrate de tener habilitado el API y facturación si corresponde.
-                google_tiles = f"https://mt1.google.com/vt/lyrs=m&x={{x}}&y={{y}}&z={{z}}&key={google_key}"
-                folium.TileLayer(tiles=google_tiles, attr='Google', name='Google Maps', overlay=False, control=True).add_to(m)
-            else:
-                # Si no hay API key, no añadimos la capa y dejamos la advertencia en el mapa (título)
-                title_html += '<br><small style="color:orange">(USE_GOOGLE_MAPS activo pero falta GOOGLE_MAPS_API_KEY)</small>'
-
         m.get_root().html.add_child(folium.Element(title_html))
 
         # Marcadores de ejemplo para Coquimbo
@@ -89,10 +61,6 @@ class MapView(tk.Frame):
             popup='Fuerte Lambert',
             icon=folium.Icon(color='red', icon='shield')
         ).add_to(m)
-        # Controles y plugins adicionales
-        MiniMap(toggle_display=True, position='bottomright').add_to(m)
-        Fullscreen(position='topright').add_to(m)
-        folium.LayerControl(collapsed=False).add_to(m)
         # --- FIN DE LOS CAMBIOS ---
 
         # Guardar el archivo
