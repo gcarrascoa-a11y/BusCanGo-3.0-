@@ -259,7 +259,7 @@ class MainWindow(tk.Frame):
             # Crear ventana de lista
             list_window = tk.Toplevel(self.parent)
             list_window.title("Lista de Rutas")
-            list_window.geometry("600x400")
+            list_window.geometry("800x520")
             list_window.transient(self.parent)
             
             # Frame principal
@@ -408,14 +408,14 @@ class MainWindow(tk.Frame):
         """Muestra un cuadro de diálogo simple para seleccionar una ruta y devuelve su nombre o None."""
         top = tk.Toplevel(self.parent)
         top.title(title)
-        top.geometry("320x300")
+        top.geometry("480x420")
         top.transient(self.parent)
         top.grab_set()
 
         frame = ttk.Frame(top, padding=10)
         frame.pack(fill="both", expand=True)
 
-        listbox = tk.Listbox(frame, height=12)
+        listbox = tk.Listbox(frame, height=18)
         vsb = ttk.Scrollbar(frame, orient="vertical", command=listbox.yview)
         listbox.configure(yscrollcommand=vsb.set)
         listbox.pack(side="left", fill="both", expand=True)
@@ -473,13 +473,14 @@ class BusDialog:
         self.data_manager = data_manager
         self.dialog = tk.Toplevel(parent)
         self.dialog.title("Nuevo Bus")
-        self.dialog.geometry("300x200")
+        # Ventana ampliada para facilitar ingreso de datos
+        self.dialog.geometry("480x320")
         self.dialog.resizable(False, False)
         self.dialog.transient(parent)
         self.dialog.grab_set()
         
-        # Centrar la ventana
-        self.dialog.geometry("+%d+%d" % (parent.winfo_rootx() + 50, parent.winfo_rooty() + 50))
+        # Centrar la ventana (ligeramente desplazada)
+        self.dialog.geometry("+%d+%d" % (parent.winfo_rootx() + 80, parent.winfo_rooty() + 80))
         
         self._create_widgets()
     
@@ -491,12 +492,12 @@ class BusDialog:
         # Número de bus
         ttk.Label(main_frame, text="Número de Bus:").grid(row=0, column=0, sticky="w", pady=5)
         self.numero_var = tk.StringVar()
-        ttk.Entry(main_frame, textvariable=self.numero_var, width=20).grid(row=0, column=1, pady=5, padx=(10, 0))
+        ttk.Entry(main_frame, textvariable=self.numero_var, width=30).grid(row=0, column=1, pady=5, padx=(10, 0))
         
         # Capacidad
         ttk.Label(main_frame, text="Capacidad:").grid(row=1, column=0, sticky="w", pady=5)
         self.capacidad_var = tk.StringVar(value="40")
-        ttk.Entry(main_frame, textvariable=self.capacidad_var, width=20).grid(row=1, column=1, pady=5, padx=(10, 0))
+        ttk.Entry(main_frame, textvariable=self.capacidad_var, width=30).grid(row=1, column=1, pady=5, padx=(10, 0))
         
         # Selección de ruta
         ttk.Label(main_frame, text="Asignar Ruta:").grid(row=2, column=0, sticky="w", pady=5)
@@ -508,19 +509,20 @@ class BusDialog:
             rutas = list(datos.get('rutas', {}).keys())
         except Exception:
             rutas = []
-        self.ruta_combo = ttk.Combobox(main_frame, textvariable=self.ruta_var, values=rutas, state='readonly')
+        self.ruta_combo = ttk.Combobox(main_frame, textvariable=self.ruta_var, values=rutas, state='readonly', width=28)
         self.ruta_combo.grid(row=2, column=1, pady=5, padx=(10, 0))
 
         # Botones para crear/editar ruta desde el diálogo del bus
+        # Botones para crear/editar ruta desde el diálogo del bus
         ruta_btn_frame = ttk.Frame(main_frame)
-        ruta_btn_frame.grid(row=3, column=0, columnspan=2, pady=(5, 0))
+        ruta_btn_frame.grid(row=3, column=0, columnspan=2, pady=(8, 0))
         ttk.Button(ruta_btn_frame, text="Nueva Ruta", command=self._crear_nueva_ruta).pack(side="left", padx=5)
         ttk.Button(ruta_btn_frame, text="Editar Ruta", command=self._editar_ruta_seleccionada).pack(side="left", padx=5)
         
         # Botones
         button_frame = ttk.Frame(main_frame)
-        button_frame.grid(row=2, column=0, columnspan=2, pady=20)
-        
+        button_frame.grid(row=4, column=0, columnspan=2, pady=20)
+
         ttk.Button(button_frame, text="Crear", command=self._crear_bus).pack(side="left", padx=5)
         ttk.Button(button_frame, text="Cancelar", command=self.dialog.destroy).pack(side="left", padx=5)
     
@@ -925,7 +927,7 @@ class EditarRutaDialog:
         self.dialog = tk.Toplevel(parent)
         self.dialog.title(f"Editar Ruta: {nombre_ruta}")
         # Ventana más amplia para facilitar la edición desde los diálogos de bus
-        self.dialog.geometry("700x520")
+        self.dialog.geometry("900x600")
         self.dialog.resizable(False, False)
         self.dialog.transient(parent)
         self.dialog.grab_set()
@@ -951,7 +953,7 @@ class EditarRutaDialog:
         text_frame.grid(row=1, column=1, pady=5, padx=(10,0), sticky="nsew")
 
         # Área de texto ampliada para editar múltiples paradas cómodamente
-        self.paradas_text = tk.Text(text_frame, width=40, height=18)
+        self.paradas_text = tk.Text(text_frame, width=60, height=22)
         scrollbar = ttk.Scrollbar(text_frame, orient="vertical", command=self.paradas_text.yview)
         self.paradas_text.configure(yscrollcommand=scrollbar.set)
         self.paradas_text.pack(side="left", fill="both", expand=True)
@@ -1011,7 +1013,7 @@ class RutaDialog:
         self.data_manager = data_manager
         self.dialog = tk.Toplevel(parent)
         self.dialog.title("Nueva Ruta")
-        self.dialog.geometry("400x300")
+        self.dialog.geometry("600x420")
         self.dialog.resizable(False, False)
         self.dialog.transient(parent)
         self.dialog.grab_set()
@@ -1038,10 +1040,10 @@ class RutaDialog:
         text_frame = ttk.Frame(main_frame)
         text_frame.grid(row=1, column=1, pady=5, padx=(10, 0), sticky="nsew")
         
-        self.paradas_text = tk.Text(text_frame, width=30, height=8)
+        self.paradas_text = tk.Text(text_frame, width=50, height=14)
         scrollbar = ttk.Scrollbar(text_frame, orient="vertical", command=self.paradas_text.yview)
         self.paradas_text.configure(yscrollcommand=scrollbar.set)
-        
+
         self.paradas_text.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
         
